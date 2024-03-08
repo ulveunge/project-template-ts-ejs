@@ -8,7 +8,7 @@ export default [
     age: 26,
   },
   {
-    firstName: "Wiiliam",
+    firstName: "William",
     age: 32,
   },
   {

@@ -10,6 +10,8 @@
   },
   "devDependencies": {
     "@types/node": "^20.11.25",
+    "cheerio": "^1.0.0-rc.12",
+    "classnames": "^2.5.1",
     "sass": "^1.71.1",
     "stimulus-vite-helpers": "^3.1.0",
     "typescript": "^5.2.2",
@@ -17,7 +19,6 @@
     "vite-plugin-ejs": "^1.7.0"
   },
   "dependencies": {
-    "@hotwired/stimulus": "^3.2.2",
-    "classnames": "^2.5.1"
+    "@hotwired/stimulus": "^3.2.2"
   }
 }

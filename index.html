@@ -8,6 +8,7 @@
 <%- include('src/partials/head', { title }) %>
 
 <body>
+  <%- include('src/partials/bem-example') %>
   <%- include('src/partials/user-list', { users }) %>
   <%- include('src/partials/shopping-list', { shoppingList, className: classes }) %>
   <script type="module" src="/src/ts/application.ts"></script>

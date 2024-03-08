@@ -1,4 +1,4 @@
-import "../scss/application.scss";
+// import "../scss/application.scss";
 
 import { Application } from "@hotwired/stimulus";
 import { registerControllers } from "stimulus-vite-helpers";
