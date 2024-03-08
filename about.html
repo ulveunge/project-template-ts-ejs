@@ -1,0 +1,12 @@
+<% const { title, users } = data['about']; %>
+
+<!doctype html>
+<html lang="en">
+<%- include('src/partials/head', { title }) %>
+
+<body>
+  <%- include('src/partials/user-list', { users }) %>
+  <script type="module" src="/src/ts/application.ts"></script>
+</body>
+
+</html>

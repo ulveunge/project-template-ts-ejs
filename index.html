@@ -1,9 +1,15 @@
+<% 
+  const { title, users, shoppingList } = data['home']; 
+  const classes = classnames('mt-10', 'mb-5', { 'space-y-1': users.length > 1 });
+%>
+
 <!doctype html>
 <html lang="en">
-<%- include('src/partials/head', { title: 'Vite Config with TS and EJS' }) %>
+<%- include('src/partials/head', { title }) %>
 
 <body>
-  <%- include('src/partials/user-list') %>
+  <%- include('src/partials/user-list', { users }) %>
+  <%- include('src/partials/shopping-list', { shoppingList, className: classes }) %>
   <script type="module" src="/src/ts/application.ts"></script>
 </body>
 
