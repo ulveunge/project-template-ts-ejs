@@ -1,0 +1,65 @@
+/// Main accent color
+$accent-red: #CB2F2F;
+
+/// Black color for titles, icons
+$black: #030F2F;
+
+/// Dark blue, main color for text
+$dark-blue: #353F58;
+
+/// Gray color, color for secondary texts
+$gray: #868C9B;
+
+/// Gray light color
+$light-gray: #D6D8DD;
+
+//Gray hover-light color
+$hover-light: rgba($black, 0.08);
+
+//Gray hover-dark color
+$hover-dark: rgba($black, 0.80);
+
+/// Gray extra-light color
+$extra-light-gray: rgba(#030F2F, 0.04);
+$extra-light-gray-no-opacity: #f4f4f5;
+
+///White color
+$white: #FFFFFF;
+
+/// Disabled text color
+$text-disabled: rgba($white, 0.80);
+
+/// White background color
+$white-background: rgba($white, 0.92);
+
+/// Border lines colors
+$gray-border-opacity-32: rgba($gray, 0.32);
+
+/// Light border color
+$light-border: #D6D8DD;
+$light-border-opacity: rgba($black, 0.16);
+$light-border-opacity-32: rgba($black, 0.32);
+
+$light-white-border-opacity: rgba($white, 0.16);
+$light-white-border-opacity-32: rgba($white, 0.32);
+$light-grey-border-opacity: rgba($light-gray, 0.16);
+
+/// Brand colors
+
+///Massey Ferguson color
+$massey-ferguson: #AB2130;
+
+/// Debont color
+$debont: #F01C21;
+
+/// Hanwo color
+$hanwo: #FF0100;
+
+/// Pauny color
+$pauny: #F0E24B;
+
+/// Fendt color
+$fendt: #275B26;
+
+/// Metalfor color
+$metalfor: #3F8D3D;

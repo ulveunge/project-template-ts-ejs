@@ -1,0 +1,385 @@
+////
+/// Placeholders for simplifying the typography styles creation.
+/// @access public
+/// @group typography
+/// @author Daniil Filippov <d.filippov@make.st>
+////
+
+@use "../mixins/media-queries" as *;
+@use "../variables/indent-system" as *;
+@use "../variables/typography" as *;
+@use "../variables/colors" as *;
+
+/// A placeholder for the colored link
+%typo-color-text-link {
+  width: fit-content;
+
+  &.link__text,
+  > .link__text {
+    transition: color 0.1s linear;
+  }
+
+  &:hover, &.active {
+    color: $accent-red;
+  }
+
+  &:active {
+    color: lighten($accent-red, 10%);
+  }
+
+  &:focus {
+    @extend %typo-base-text-link-focused;
+  }
+
+  @at-root .visually-impaired %typo-base-text-link {
+    border-bottom: none !important;
+    color: currentColor;
+    text-decoration: underline;
+  }
+}
+/// A placeholder for the base text link styles.
+%typo-base-text-link {
+  width: fit-content;
+  transition: opacity 0.2s linear;
+  &.link__text,
+  .link__text {
+    @extend %typo-base-text-link-transition;
+    background: linear-gradient(0deg, currentColor, currentColor) no-repeat right bottom / 0 1px;
+  }
+
+  &.link__text:hover,
+  &:hover .link__text{
+    @extend %typo-base-text-link-hover;
+  }
+
+  &:active {
+     //color: $color-interactive-element-active;
+  }
+
+  &.link__text:focus,
+  &:focus > .link__text {
+    @extend %typo-base-text-link-focused;
+  }
+
+  @at-root .visually-impaired %typo-base-text-link {
+    border-bottom: none !important;
+    color: currentColor;
+    text-decoration: underline;
+  }
+}
+
+%typo-dotted-text-link {
+  &.link__text,
+  > .link__text {
+    @extend %typo-base-text-link-transition;
+    border-bottom: 1px dotted currentColor;
+  }
+
+  &.link__text:hover,
+  &:hover .link__text{
+    //@extend %typo-base-text-link-hover;
+  }
+
+  &:active {
+    // color: $color-interactive-element-active;
+  }
+
+  &.link__text:focus,
+  &:focus > .link__text {
+    @extend %typo-base-text-link-focused;
+  }
+
+  @at-root .visually-impaired %typo-base-text-link {
+    border-bottom: none !important;
+    color: currentColor;
+    text-decoration: underline;
+  }
+
+}
+
+%typo-base-text-link-hover {
+  background-size: 100% 1px;
+  background-position-x: left;
+}
+
+/// A placeholder for the base text link's `transition` property value.
+%typo-base-text-link-transition {
+  transition: color 0.1s linear, border-color 0.175s ease-out, outline-color 0.1s linear, background-size 0.32s ease-in-out, opacity 0.2s linear;
+}
+
+/// A placeholder for cancelling the underlined state of the base text link.
+%typo-base-text-link-underlined-cancel {
+  border-bottom-color: transparent;
+}
+
+/// A placeholder for the focused state of the base text link.
+%typo-base-text-link-focused {
+  @extend %typo-base-text-link-underlined-cancel;
+  // outline: 4px solid $color-interactive-element-outline;
+  outline-offset: 2px;
+
+  &:hover {
+    transition-delay: 0s, 0s, 0.2s;
+  }
+}
+
+/// A placeholder for the bullet symbol.
+%typo-text-bullet {
+  // color: $color-field-frame;
+  content: '•';
+}
+
+
+/// A placeholder for the text link's bullet.
+%typo-text-link-bullet {
+  &:before {
+    @extend %typo-text-bullet;
+    padding-right: 8px;
+  }
+}
+
+/// A placeholder for the text link's arrow.
+%typo-text-link-arrow {
+  &:after {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 8px;
+    height: 8px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='none'><path fill-rule='evenodd' clip-rule='evenodd' d='M7.62667 0C7.83285 0 8 0.167147 8 0.373333V6.5C8 6.77614 7.77614 7 7.5 7V7C7.22386 7 7 6.77614 7 6.5V1.711L1.06067 7.65063C0.865405 7.84591 0.548805 7.84591 0.353533 7.65064V7.65064C0.158277 7.45538 0.158263 7.13882 0.353502 6.94354L6.296 1H1.5C1.22386 1 1 0.776142 1 0.5V0.5C1 0.223858 1.22386 0 1.5 0H7.62667Z' fill='%23261716'/></svg>");
+    transition: filter 0.1s linear;
+    content: "";
+  }
+
+  @at-root .visually-impaired %typo-text-link-arrow {
+    &:after {
+      filter: brightness(0%) !important;
+    }
+  }
+  @at-root .visually-impaired--dark %typo-text-link-arrow {
+    &:after {
+      filter: brightness(0%) invert(100%) !important;
+    }
+  }
+}
+
+/// A placeholder for the text link's arrow's hover state.
+%typo-text-link-arrow-hover {
+  &:after {
+    filter: brightness(68.25%);
+  }
+}
+
+/// A placeholder for the "arrow" for external links only
+/// @todo revisit styles
+%typo-text-link-external-url-arrow {
+  position: relative;
+  padding-right: 16px;
+
+  &[href^="http"] {
+    @extend %typo-text-link-arrow;
+
+    &:hover {
+      @extend %typo-text-link-arrow-hover;
+    }
+  }
+}
+
+/// A placeholder for the base text lists styles.
+// %typo-base-text-list {
+//   @include indent-outer-vertical-pair(20);
+
+//   li {
+//     display: block;
+//     position: relative;
+//     @include indent-left(28);
+//   }
+
+//   li:nth-child(n + 2), ul, ol {
+//     @include indent-outer-top(12);
+//   }
+// }
+
+/// A placeholder for the unordered list styles (the first level).
+%typo-unordered-text-list {
+  > li {
+    position: relative;
+    display: block;
+    margin-top: $indent-16;
+    padding-left: $indent-48;
+    &:before {
+      position: absolute;
+      left: 0;
+      top: 14px;
+      width: 20px;
+      height: 2px;
+      background-color: $accent-red;
+      content: '';
+    }
+  }
+}
+
+%typo-unordered-text-list--circle {
+  > li:before {
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: currentColor;
+    content: '';
+  }
+}
+
+/// A placeholder for the unordered list styles (the second level).
+%typo-unordered-text-list-nested {
+  > li > ul > li {
+    position: relative;
+    display: block;
+    margin-top: $indent-16;
+    padding-left: $indent-48;
+    &:before {
+      position: absolute;
+      left: 0;
+      top: 12px;
+      background: $accent-red;
+      height: 2px;
+      width: 20px;
+      content: '';
+    }
+  }
+}
+
+/// A placeholder for the ordered list styles (the first level).
+%typo-ordered-text-list {
+  counter-reset: ol-counter ol-custom-number;
+
+  // TODO: revisit styles
+  // styles for the lists with the custom starting number (like 2.1.1):
+  @for $i from 1 through 10 {
+    &[data-custom-number-#{$i}] {
+      counter-reset: ol-counter ol-custom-number $i;
+    }
+  }
+
+  > li {
+    position: relative;
+    display: block;
+    margin-top: $indent-16;
+    padding-left: calc($indent-24 + $indent-16);
+    &:before {
+      font-variation-settings: 'slnt' -10;
+      color: $accent-red;
+      position: absolute;
+      left: 0;
+      top: 0;
+      counter-increment: ol-counter;
+      content: attr(data-counter) counter(ol-counter) '.';
+    }
+  }
+
+  // Small "visual compensation":
+  > li:nth-child(n + 10) {
+    &:before {
+      margin-left: -8px;
+    }
+  }
+  > li:nth-child(11) {
+    &:before {
+      margin-left: -6px;
+    }
+  }
+
+  //TODO: revisit styles
+  //styles for the lists with the custom starting number (like 2.1.1):
+  &[data-custom-number] {
+    padding-left: $indent-12;
+
+    > li:before {
+      margin-left: calc(-1 * $indent-12);
+      content: counter(ol-custom-number) '.' counter(ol-counter) '.';
+    }
+  }
+}
+
+%typo-ordered-text-list-nested {
+  > li > ol {
+    padding-left: $indent-24;
+    counter-reset: ol-nested-counter;
+    > li {
+      margin-top: $indent-16;
+      &:before {
+        padding-right: $indent-16;
+        color: $accent-red;
+        margin-left: calc(-1 * $indent-24);
+        counter-increment: ol-nested-counter;
+        content: counter(ol-counter) '.' counter(ol-nested-counter);
+      }
+
+      > li:nth-child(n + 10):before {
+        margin-left: calc(-1 * $indent-32);
+      }
+    }
+  }
+}
+
+/// A placeholder for the ordered list styles (the second level).
+//%typo-ordered-text-list-nested {
+//  // TODO: list-style-type: lower-russian isn't supported for now — generate
+//  // ordered list styles manually:
+//  $letters: (а б в г д е ж з и к л м н о п р с т у ф х ц ч ш щ ъ ы ь э ю я);
+//  > li > ol > li {
+//    @for $i from 1 through length($letters) {
+//      &:nth-child(#{$i}):before {
+//        content: '#{nth($letters, $i)})';
+//      }
+//    }
+//    &:before {
+//      position: absolute;
+//      left: 0;
+//      top: 0;
+//    }
+//  }
+//
+//  // TODO: revisit styles
+//  // styles for the lists with the custom starting number (like 2.1.1):
+//  &[data-custom-number] {
+//    > li > ol {
+//      padding-left: $indent-24;
+//      counter-reset: ol-nested-counter;
+//
+//      > li:before {
+//        margin-left: calc(-1 * $indent-24);
+//        counter-increment: ol-nested-counter;
+//        content: counter(ol-custom-number) '.' counter(ol-counter) '.' counter(ol-nested-counter) '.';
+//      }
+//
+//      > li:nth-child(n + 10):before {
+//        margin-left: calc(-1 * $indent-32);
+//      }
+//    }
+//  }
+//}
+
+// /// A placeholder for the section's bottom dividing line
+// %section-dividing-line-bottom {
+//   &:after {
+//     position: absolute;
+//     left: 16px;
+//     right: 16px;
+//     bottom: 0;
+//     border-top: 1px solid $color-dividing-line-light;
+//     content: "";
+//
+//     @include screen-small-up {
+//       left: 24px;
+//       right: 24px;
+//     }
+//
+//     @include screen-medium-up {
+//       left: 32px;
+//       right: 32px;
+//     }
+//   }
+// }

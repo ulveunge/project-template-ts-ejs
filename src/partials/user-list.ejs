@@ -1,0 +1,27 @@
+<% 
+
+  const users = [
+  {
+    firstName: 'Andrew',
+    age: 20
+  },
+  {
+    firstName: 'John',
+    age: 26
+  },
+  {
+    firstName: 'Wiiliam',
+    age: 32
+  },
+  {
+    firstName: 'Elise',
+    age: 29
+  },
+  ]; 
+
+%>
+
+<ul data-controller="test"><% users.forEach(user => { %>
+  <li><%= user.firstName %>, <%= user.age %> years old</li>
+  <% }) %>
+</ul>

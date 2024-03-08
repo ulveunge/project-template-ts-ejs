@@ -1,0 +1,237 @@
+////
+/// Global variables for the indent system.
+/// @group indent-system
+/// @type Length
+/// @author Daniil Filippov <d.filippov@make.st>
+////
+
+@use "../mixins/media-queries" as *;
+@use "../functions/linear-interpolation" as *;
+@use "grid" as *;
+
+@function _small-sizes-interpolation($min, $max) {
+  @return linear-interpolation($grid-container-small-min, $min, $grid-container-small-max, $max);
+}
+
+@function _medium-sizes-interpolation($min, $max) {
+  @return linear-interpolation($grid-container-medium-min, $min, $grid-container-medium-max, $max);
+}
+
+@function _large-sizes-interpolation($min, $max) {
+  @return linear-interpolation($grid-container-large-min, $min, $grid-container-large-max, $max);
+}
+
+@function _huge-sizes-interpolation($min, $max) {
+  @return linear-interpolation($grid-container-huge-min, $min, $grid-container-huge-max, $max);
+}
+$_indent-160-size-small-down: 64px;
+$_indent-160-size-huge-up: 160px;
+$_indent-160-size-small: $_indent-160-size-small-down;
+$_indent-160-size-medium: _medium-sizes-interpolation(64px, 80px);
+$_indent-160-size-large: _large-sizes-interpolation(80px, 120px);
+$_indent-160-size-huge: _huge-sizes-interpolation(120px, $_indent-160-size-huge-up);
+
+$_indent-120-size-small-down: 48px;
+$_indent-120-size-huge-up: 120px;
+$_indent-120-size-small: _small-sizes-interpolation($_indent-120-size-small-down, 64px);
+$_indent-120-size-medium: _medium-sizes-interpolation(64px, 80px);
+$_indent-120-size-large: _large-sizes-interpolation(64px, 80px);
+$_indent-120-size-huge: _huge-sizes-interpolation(80px, $_indent-120-size-huge-up);
+
+$_indent-80-size-small-down: 40px;
+$_indent-80-size-huge-up: 80px;
+$_indent-80-size-small: _small-sizes-interpolation($_indent-80-size-small-down, 48px);
+$_indent-80-size-medium: _medium-sizes-interpolation(48px, 56px);
+$_indent-80-size-large: _large-sizes-interpolation(48px, 56px);
+$_indent-80-size-huge: _huge-sizes-interpolation(64px, $_indent-80-size-huge-up);
+
+$_indent-64-size-small-down: 32px;
+$_indent-64-size-huge-up: 64px;
+$_indent-64-size-small: $_indent-64-size-small-down;
+$_indent-64-size-medium: _medium-sizes-interpolation(40px, 48px);
+$_indent-64-size-large: _large-sizes-interpolation(48px, 64px);
+$_indent-64-size-huge: _huge-sizes-interpolation(64px, $_indent-64-size-huge-up);
+
+$_indent-48-size-small-down: 32px;
+$_indent-48-size-huge-up: 48px;
+$_indent-48-size-small: 32px;
+$_indent-48-size-medium: 32px;
+$_indent-48-size-large: _large-sizes-interpolation(32px, 40px);
+$_indent-48-size-huge: _huge-sizes-interpolation(40px, $_indent-48-size-huge-up);
+
+//$_indent-40-size-small-down: 24px;
+//$_indent-40-size-huge-up: 40px;
+//$_indent-40-size-small: _small-sizes-interpolation($_indent-40-size-small-down, 32px);
+//$_indent-40-size-medium: _medium-sizes-interpolation(32px, 36px);
+//$_indent-40-size-large: _large-sizes-interpolation(32px, 36px);
+//$_indent-40-size-huge: _huge-sizes-interpolation(36px, $_indent-40-size-huge-up);
+
+$_indent-32-size-small-down: 16px;
+$_indent-32-size-huge-up: 32px;
+$_indent-32-size-small: $_indent-32-size-small-down;
+$_indent-32-size-medium: $_indent-32-size-small-down;
+$_indent-32-size-large: _large-sizes-interpolation(24px, 28px);
+$_indent-32-size-huge: _huge-sizes-interpolation(28px, $_indent-32-size-huge-up);
+
+$_indent-24-size-small-down: 16px;
+$_indent-24-size-huge-up: 24px;
+$_indent-24-size-small: $_indent-24-size-small-down;
+$_indent-24-size-medium: $_indent-24-size-small-down;
+$_indent-24-size-large: $_indent-24-size-small-down;
+$_indent-24-size-huge: _huge-sizes-interpolation($_indent-24-size-small-down, $_indent-24-size-huge-up);
+
+//$_indent-28-size-small-down: 16px;
+//$_indent-28-size-huge-up: 28px;
+//$_indent-28-size-small: $_indent-28-size-small-down;
+//$_indent-28-size-medium: _medium-sizes-interpolation(16px, 20px);
+//$_indent-28-size-large: _large-sizes-interpolation(20px, 24px);
+//$_indent-28-size-huge: _huge-sizes-interpolation(24px, $_indent-28-size-huge-up);
+
+//$_indent-20-size-small-down: 12px;
+//$_indent-20-size-huge-up: 20px;
+//$_indent-20-size-small: $_indent-20-size-small-down;
+//$_indent-20-size-medium: 16px;
+//$_indent-20-size-large: 18px;
+//$_indent-20-size-huge: _huge-sizes-interpolation(18px, $_indent-20-size-huge-up);
+
+$_indent-16-size-small-down: 12px;
+$_indent-16-size-huge-up: 16px;
+$_indent-16-size-small: $_indent-16-size-small-down;
+$_indent-16-size-medium: $_indent-16-size-small-down;
+$_indent-16-size-large: $_indent-16-size-small-down;
+$_indent-16-size-huge: $_indent-16-size-large;
+
+$_indent-12-size-small-down: 8px;
+$_indent-12-size-huge-up: 12px;
+$_indent-12-size-small: $_indent-12-size-small-down;
+$_indent-12-size-medium: $_indent-12-size-small;
+$_indent-12-size-large: 12px;
+$_indent-12-size-huge: $_indent-12-size-large;
+
+$_indent-8-size-small-down: 8px;
+$_indent-8-size-huge-up: 8px;
+$_indent-8-size-small: $_indent-8-size-small-down;
+$_indent-8-size-medium: $_indent-8-size-small;
+$_indent-8-size-large: $_indent-8-size-medium;
+$_indent-8-size-huge: $_indent-8-size-large;
+
+:root {
+  --indent-160-size: #{$_indent-160-size-small-down};
+  --indent-120-size: #{$_indent-120-size-small-down};
+  --indent-80-size: #{$_indent-80-size-small-down};
+  --indent-64-size: #{$_indent-64-size-small-down};
+  --indent-48-size: #{$_indent-48-size-small-down};
+  //--indent-40-size: #{$_indent-40-size-small-down};
+  --indent-32-size: #{$_indent-32-size-small-down};
+  //--indent-28-size: #{$_indent-28-size-small-down};
+  --indent-24-size: #{$_indent-24-size-small-down};
+  //--indent-20-size: #{$_indent-20-size-small-down};
+  --indent-16-size: #{$_indent-16-size-small-down};
+  --indent-12-size: #{$_indent-12-size-small-down};
+  --indent-8-size: #{$_indent-8-size-small-down};
+  --indent-body: 4px;
+
+  @include screen-small-up {
+    --indent-160-size: #{$_indent-160-size-small};
+    --indent-120-size: #{$_indent-120-size-small};
+    --indent-80-size: #{$_indent-80-size-small};
+    --indent-64-size: #{$_indent-64-size-small};
+    --indent-48-size: #{$_indent-48-size-small};
+    //--indent-40-size: #{$_indent-40-size-small};
+    --indent-32-size: #{$_indent-32-size-small};
+    //--indent-28-size: #{$_indent-28-size-small};
+    --indent-24-size: #{$_indent-24-size-small};
+    //--indent-20-size: #{$_indent-20-size-small};
+    --indent-16-size: #{$_indent-16-size-small};
+    --indent-12-size: #{$_indent-12-size-small};
+    --indent-8-size: #{$_indent-8-size-small};
+  }
+
+  @include screen-medium-up {
+    --indent-160-size: #{$_indent-160-size-medium};
+    --indent-120-size: #{$_indent-120-size-medium};
+    --indent-80-size: #{$_indent-80-size-medium};
+    --indent-64-size: #{$_indent-64-size-medium};
+    --indent-48-size: #{$_indent-48-size-medium};
+    //--indent-40-size: #{$_indent-40-size-medium};
+    --indent-32-size: #{$_indent-32-size-medium};
+    //--indent-28-size: #{$_indent-28-size-medium};
+    --indent-24-size: #{$_indent-24-size-medium};
+    //--indent-20-size: #{$_indent-20-size-medium};
+    --indent-16-size: #{$_indent-16-size-medium};
+    --indent-12-size: #{$_indent-12-size-medium};
+    --indent-8-size: #{$_indent-8-size-medium};
+  }
+
+  @include screen-large-up {
+    --indent-160-size: #{$_indent-160-size-large};
+    --indent-120-size: #{$_indent-120-size-large};
+    --indent-80-size: #{$_indent-80-size-large};
+    --indent-64-size: #{$_indent-64-size-large};
+    --indent-48-size: #{$_indent-48-size-large};
+    //--indent-40-size: #{$_indent-40-size-large};
+    --indent-32-size: #{$_indent-32-size-large};
+    //--indent-28-size: #{$_indent-28-size-large};
+    --indent-24-size: #{$_indent-24-size-large};
+    //--indent-20-size: #{$_indent-20-size-large};
+    --indent-16-size: #{$_indent-16-size-large};
+    --indent-12-size: #{$_indent-12-size-large};
+    --indent-8-size: #{$_indent-8-size-large};
+    --indent-body: 8px;
+  }
+
+  @include screen-huge-up {
+    --indent-160-size: #{$_indent-160-size-huge};
+    --indent-120-size: #{$_indent-120-size-huge};
+    --indent-80-size: #{$_indent-80-size-huge};
+    --indent-64-size: #{$_indent-64-size-huge};
+    --indent-48-size: #{$_indent-48-size-huge};
+    //--indent-40-size: #{$_indent-40-size-huge};
+    --indent-32-size: #{$_indent-32-size-huge};
+    //--indent-28-size: #{$_indent-28-size-huge};
+    --indent-24-size: #{$_indent-24-size-huge};
+    //--indent-20-size: #{$_indent-20-size-huge};
+    --indent-16-size: #{$_indent-16-size-huge};
+    --indent-12-size: #{$_indent-12-size-huge};
+    --indent-8-size: #{$_indent-8-size-huge};
+  }
+
+  @include screen-min($grid-container-huge-max + 1px) {
+    --indent-160-size: #{$_indent-160-size-huge-up};
+    --indent-120-size: #{$_indent-120-size-huge-up};
+    --indent-80-size: #{$_indent-80-size-huge-up};
+    --indent-64-size: #{$_indent-64-size-huge-up};
+    --indent-48-size: #{$_indent-48-size-huge-up};
+    //--indent-40-size: #{$_indent-40-size-huge-up};
+    --indent-32-size: #{$_indent-32-size-huge-up};
+    //--indent-28-size: #{$_indent-28-size-huge-up};
+    --indent-24-size: #{$_indent-24-size-huge-up};
+    //--indent-20-size: #{$_indent-20-size-huge-up};
+    --indent-16-size: #{$_indent-16-size-huge-up};
+    --indent-12-size: #{$_indent-12-size-huge-up};
+    --indent-8-size: #{$_indent-8-size-huge-up};
+  }
+}
+
+/// The design system's "160" indent's variable size.
+$indent-160: var(--indent-160-size);
+/// The design system's "120" indent's variable size.
+$indent-120: var(--indent-120-size);
+/// The design system's "80" indent's variable size.
+$indent-80: var(--indent-80-size);
+/// The design system's "64" indent's variable size.
+$indent-64: var(--indent-64-size);
+/// The design system's "48" indent's variable size.
+$indent-48: var(--indent-48-size);
+/// The design system's "32" indent's variable size.
+$indent-32: var(--indent-32-size);
+/// The design system's "24" indent's variable size.
+$indent-24: var(--indent-24-size);
+/// The design system's "16" indent's variable size.
+$indent-16: var(--indent-16-size);
+/// The design system's "12" indent's variable size.
+$indent-12: var(--indent-12-size);
+/// The design system's "8" indent's variable size.
+$indent-8: var(--indent-8-size);
+/// The design system's base padding in body.
+$indent-body: var(--indent-body);

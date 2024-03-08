@@ -1,0 +1,30 @@
+////
+/// Simple placeholders with a wide range of application.
+/// @access public
+/// @group helpers
+/// @author Daniil Filippov <d.filippov@make.st>
+////
+
+
+/// A placeholder for hiding the system scrollbar.
+%helper-hidden-system-scrollbar {
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+
+/// A placeholder for the absolutely positioned full-size
+/// pseudo-elements.
+%helper-full-size-pseudo-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: "";
+}

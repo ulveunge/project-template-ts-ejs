@@ -1,0 +1,71 @@
+@use './mixins' as *;
+@use './variables' as *;
+
+$base-font-family: 'Inter', Helvetica, Arial, sans-serif;
+
+@font-face {
+  font-family: 'Inter';
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+  src: url('../fonts/Inter-Variable.woff2') format('woff2-variations'),
+  url('../fonts/Inter-Variable.ttf') format('truetype-variations');
+}
+
+body {
+  @include typo-make-text;
+  font-family: $base-font-family;
+  color: $color-black;
+  -webkit-text-size-adjust: 100%;
+}
+
+.h1, h1 {
+  @include typo-make-h1;
+}
+
+.h2, h2, .h1--article {
+  @include typo-make-h2;
+}
+
+.h3, h3 {
+  @include typo-make-h3;
+}
+
+.semi-bold-text {
+  font-weight: 600;
+}
+
+.bold-text {
+  font-weight: 700;
+}
+
+.italic-text {
+  font-variation-settings: 'slnt' -10;
+}
+
+.standard-text {
+  @include typo-make-text;
+}
+
+.small-text {
+  @include typo-make-small;
+}
+
+.extra-small-text {
+  @include typo-make-extra-small;
+}
+
+.gray-helper-text {
+  @include typo-make-small;
+  color: $color-light-border-opacity-32;
+}
+
+.text-align-left {
+  text-align: left;
+}
+
+.text-clip {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

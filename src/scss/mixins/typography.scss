@@ -1,0 +1,87 @@
+////
+/// A set of mixins to simplify the creation of typography styles.
+/// @group typography
+/// @author Daniil Filippov <d.filippov@make.st>
+////
+
+@use "../variables/colors" as *;
+@use "../variables/typography" as *;
+
+/// Base mixin for applying `font-size` and `line-height` values according to the design system.
+/// @param {Length} $size - Variable or static font-size value.
+@mixin typo-make-sizes($size, $isH2: false, $isLead: false ) {
+  font-size: $size;
+
+  @if ($isLead) {
+    line-height: calc(1em + 12px);
+  } @else {
+    line-height: calc(1em + 8px);
+  }
+
+  @if ($isH2) {
+    letter-spacing: -2px;
+  } @else {
+    letter-spacing: calc($size * -0.02);
+  }
+
+  //@if ($isHeading) {
+  //  line-height: $typo-line-height-heading;
+  //} @else {
+  //  line-height: $typo-line-height-text;
+  //}
+}
+
+/// A mixin for applying `font-size` and `line-height` values according to the design system for
+/// the h1 heading.
+@mixin typo-make-h1() {
+  @include typo-make-sizes($typo-h1-size);
+}
+/// A mixin for applying `font-size` and `line-height` values according to the design system for
+/// the h2 heading.
+@mixin typo-make-h2() {
+  @include typo-make-sizes($typo-h2-size, true);
+}
+/// A mixin for applying `font-size` and `line-height` values according to the design system for
+/// the h2 article heading.
+@mixin typo-make-article-h2() {
+  @include typo-make-sizes($typo-article-h2-size, true);
+}
+/// A mixin for applying `font-size` and `line-height` values according to the design system for
+/// the h3 heading.
+@mixin typo-make-h3($isLead: false) {
+  @include typo-make-sizes($typo-h3-size, false, $isLead);
+}
+///// A mixin for applying `font-size` and `line-height` values according to the design system for
+///// the h4 heading.
+//@mixin typo-make-h4() {
+//  @include typo-make-sizes($typo-h4-size);
+//}
+//
+///// A mixin for applying `font-size` and `line-height` values according to the design system for
+///// the h5 heading.
+//@mixin typo-make-h5() {
+//  @include typo-make-sizes($typo-h5-size);
+//}
+//
+///// A mixin for applying `font-size` and `line-height` values according to the design system for
+///// the lead text.
+//@mixin typo-make-lead {
+//  @include typo-make-sizes($typo-lead-size);
+//}
+
+/// A mixin for applying `font-size` and `line-height` values according to the design system for
+/// the base text.
+@mixin typo-make-text {
+  @include typo-make-sizes($typo-text-size);
+}
+
+/// A mixin for applying `font-size` and `line-height` values according to the design system for
+/// the nav text.
+@mixin typo-make-small {
+  @include typo-make-sizes($typo-small-size);
+}
+/// A mixin for applying `font-size` and `line-height` values according to the design system for
+/// the nav text.
+@mixin typo-make-extra-small {
+  @include typo-make-sizes($typo-extra-small-size);
+}

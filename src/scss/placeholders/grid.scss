@@ -1,0 +1,67 @@
+////
+/// Placeholders for simplifying the grid styles creation.
+/// @access public
+/// @group grid
+/// @author Daniil Filippov <d.filippov@make.st>
+/// @link http://standart.gov.design/design/layout
+////
+
+@use "../variables/colors" as *;
+@use "../variables/grid" as *;
+@use "../mixins/media-queries" as *;
+
+
+/// The grid container placeholder.
+%grid-container {
+  @extend %grid-container-base;
+  display: grid;
+  column-gap: $grid-gutter-tiny;
+
+  @include screen-small-up {
+    column-gap: $grid-gutter-small;
+  }
+
+  @include screen-medium-up {
+    column-gap: $grid-gutter-medium;
+  }
+
+  @include screen-large-up {
+    column-gap: $grid-gutter-large;
+  }
+
+  @include screen-huge-up {
+    column-gap: $grid-gutter-huge;
+  }
+}
+
+/// The grid container's base styles placeholder.
+%grid-container-base {
+  padding-left: $grid-padding-tiny;
+  padding-right: $grid-padding-tiny;
+  // margin-left: auto;
+  // margin-right: auto;
+
+  @include screen-small-up {
+    // max-width: $grid-container-content-small-max;
+    padding-left: $grid-padding-small;
+    padding-right: $grid-padding-small;
+  }
+
+  @include screen-medium-up {
+    // max-width: $grid-container-content-medium-max;
+    padding-left: $grid-padding-medium;
+    padding-right: $grid-padding-medium;
+  }
+
+  @include screen-large-up {
+    // max-width: $grid-container-content-large-max;
+    padding-left: $grid-padding-large;
+    padding-right: $grid-padding-large;
+  }
+
+  @include screen-huge-up {
+    // max-width: $grid-container-content-huge-max;
+    padding-left: $grid-padding-huge;
+    padding-right: $grid-padding-huge;
+  }
+}

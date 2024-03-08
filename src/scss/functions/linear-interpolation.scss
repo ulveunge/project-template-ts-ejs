@@ -1,0 +1,27 @@
+////
+/// linear-interpolation function.
+/// @group helpers
+/// @author Daniil Filippov <d.filippov@make.st>
+////
+
+@use "sass:math";
+
+/// Calculates the definition of a line between the two points.
+/// @param {Length} $x1
+/// @param {Length} $y1
+/// @param {Length} $x2
+/// @param {Length} $y2
+/// @return {Length} A linear equation as a calc() function
+/// @example
+///   font-size: linear-interpolation(320px, 18px, 768px, 26px);
+@function linear-interpolation($x1, $y1, $x2, $y2) {
+  $m: math.div($y2 - $y1, $x2 - $x1);
+  $b: $y1 - $m * $x1;
+  $sign: "+";
+  @if ($b < 0) {
+    $sign: "-";
+    $b: abs($b);
+  }
+  // stylelint-disable-next-line
+  @return calc(#{$m*100}vw #{$sign} #{$b});
+}

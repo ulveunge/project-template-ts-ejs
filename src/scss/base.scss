@@ -1,0 +1,14 @@
+@use './variables' as *;
+@use './mixins' as *;
+
+body {
+  gap: 0;
+  padding: 0 $indent-body;
+  background-color: $color-extra-light-gray;
+  display: flex;
+  flex-direction: column;
+}
+
+.indent-24 {
+  margin-top: $indent-24;
+}

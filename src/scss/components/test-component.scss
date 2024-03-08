@@ -1,0 +1,10 @@
+@use '../placeholders';
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.test-component {
+  margin-top: 24px;
+  font-size: 5rem;
+  font-weight: 800;
+  color: turquoise;
+}

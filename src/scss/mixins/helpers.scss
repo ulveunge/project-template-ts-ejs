@@ -1,0 +1,18 @@
+////
+/// Simple mixins with a wide range of application.
+/// @access public
+/// @group helpers
+/// @author Daniil Filippov <d.filippov@make.st>
+////
+
+/// A mixin for hiding the system scrollbar.
+@mixin helper-hide-scrollbar {
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
