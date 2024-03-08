@@ -37,7 +37,7 @@ const transformHtml = (html: string) => {
 
 export default function ViteBEMHelperPlugin(): Plugin {
   return {
-    name: "vite-plugin-html-transform",
+    name: "vite-plugin-bem-helper",
     buildStart() {},
     transformIndexHtml(html) {
       return transformHtml(html);
