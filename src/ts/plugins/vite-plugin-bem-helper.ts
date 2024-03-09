@@ -97,8 +97,8 @@ class ElementEntity extends BemEntity {
 const transformHtml = (html: string) => {
   const $ = cheerio.load(html);
 
-  const elementNodes = $('[class^="e_"]').toArray();
   const blockNodes = $('[class^="b_"]').toArray();
+  const elementNodes = $('[class^="e_"]').toArray();
 
   if (!blockNodes.length) return;
 
@@ -107,10 +107,10 @@ const transformHtml = (html: string) => {
     elementEntity.replaceClassNames();
   });
 
-  // blockNodes.forEach((blockNode) => {
-  //   const blockEntity = new BlockEntity(blockNode);
-  //   blockEntity.replaceClassNames();
-  // });
+  blockNodes.forEach((blockNode) => {
+    const blockEntity = new BlockEntity(blockNode);
+    blockEntity.replaceClassNames();
+  });
 
   return $.html();
 };
