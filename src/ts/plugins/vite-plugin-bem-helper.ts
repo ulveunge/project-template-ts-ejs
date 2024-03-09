@@ -1,36 +1,116 @@
 import { Plugin } from "vite";
 import * as cheerio from "cheerio";
 
-const retrieveBEMEntity = (className: string, BEMEntity: string) => {
-  const string = className.split(" ").find((el) => el.includes(BEMEntity));
+abstract class BemEntity {
+  node: cheerio.Element;
 
-  if (string) {
-    return string.replace(`${BEMEntity}`, "");
+  constructor(node: cheerio.Element) {
+    this.node = node;
   }
 
-  return "";
-};
+  protected retrieveBEMClasses(
+    className: string,
+    prefix: "b" | "e" | "m" | null = null
+  ) {
+    const prefixRegex = prefix ? `${prefix}-` : "[bem]-";
+    const regex = new RegExp(`${prefixRegex}?\\d*_\\s*([^ ]*)`, "g");
+
+    return className.match(regex) || [];
+  }
+
+  protected getClassId(className: string) {
+    return className.split("_")[0];
+  }
+
+  protected formatClassName(className: string) {
+    return className.split("_")[1];
+  }
+
+  abstract replaceClassNames(): void;
+}
+
+class BlockEntity extends BemEntity {
+  constructor(node: cheerio.Element) {
+    super(node);
+  }
+
+  replaceClassNames() {
+    const className = this.node.attribs.class;
+
+    const blockClasses = this.retrieveBEMClasses(className, "b");
+
+    blockClasses.forEach((blockClass) => {
+      this.node.attribs.class = this.node.attribs.class.replace(
+        blockClass,
+        this.formatClassName(blockClass)
+      );
+    });
+  }
+}
+
+class ElementEntity extends BemEntity {
+  $: cheerio.CheerioAPI;
+
+  constructor(node: cheerio.Element, $: cheerio.CheerioAPI) {
+    super(node);
+    this.$ = $;
+  }
+
+  replaceClassNames() {
+    const className = this.node.attribs.class;
+
+    const elementClasses = this.retrieveBEMClasses(className, "e");
+
+    elementClasses.forEach((elementClass) => {
+      const blockClass = this.determineBlock(elementClass);
+
+      if (!blockClass) return;
+
+      const elementId = this.getClassId(elementClass);
+
+      this.node.attribs.class = this.node.attribs.class.replace(
+        `${elementId}_`,
+        `${blockClass}__`
+      );
+    });
+  }
+
+  private determineBlock(className: string) {
+    const blockNode = this.$(this.node).closest(`[class^="b_"]`);
+
+    const blockNodeClasses = blockNode.attr("class");
+
+    if (!blockNodeClasses) return;
+
+    const classesArr = blockNodeClasses.split(" ");
+
+    const blockName = classesArr.find((cls) => {
+      return cls.includes(`${this.getClassId(className).replace("e", "b")}`);
+    });
+
+    if (!blockName) return;
+
+    return this.formatClassName(blockName);
+  }
+}
 
 const transformHtml = (html: string) => {
   const $ = cheerio.load(html);
-  const bemBlocks = $('[class^="b:"]');
 
-  bemBlocks.each((_, b) => {
-    const blockName = retrieveBEMEntity(b.attribs.class, "b:");
-    b.attribs.class = b.attribs.class.replace("b:", "");
-    b.attribs.class = b.attribs.class.replace(/m:/g, `${blockName}--`);
+  const elementNodes = $('[class^="e_"]').toArray();
+  const blockNodes = $('[class^="b_"]').toArray();
 
-    const bemElements = $(`.${blockName} [class^="e:"]`);
+  if (!blockNodes.length) return;
 
-    (bemElements as cheerio.Cheerio<cheerio.Element>).each((_, e) => {
-      const elementName = retrieveBEMEntity(e.attribs.class, "e:");
-      e.attribs.class = e.attribs.class.replace(/e:/g, `${blockName}__`);
-      e.attribs.class = e.attribs.class.replace(
-        /m:/g,
-        `${blockName}__${elementName}--`
-      );
-    });
+  elementNodes.forEach((elementNode) => {
+    const elementEntity = new ElementEntity(elementNode, $);
+    elementEntity.replaceClassNames();
   });
+
+  // blockNodes.forEach((blockNode) => {
+  //   const blockEntity = new BlockEntity(blockNode);
+  //   blockEntity.replaceClassNames();
+  // });
 
   return $.html();
 };
