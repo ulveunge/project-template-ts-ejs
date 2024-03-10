@@ -99,10 +99,9 @@ export class ElementEntity extends BemEntity {
   }
 
   private determineBlock(className: string) {
-    const blockNode = this.$(this.node)
-      .parents()
-      .find(`[class*="${this.getClassId(className).replace("e", "b")}:"]`)
-      .first();
+    const blockNode = this.$(this.node).closest(
+      `[class*="${this.getClassId(className).replace("e", "b")}:"]`
+    );
 
     const blockNodeClasses = blockNode.attr("class");
 
