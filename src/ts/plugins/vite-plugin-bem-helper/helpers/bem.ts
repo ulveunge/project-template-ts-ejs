@@ -7,10 +7,16 @@ abstract class BemEntity {
     this.node = node;
   }
 
-  protected retrieveBEMClasses(className: string, prefix: "b" | "e" | "m") {
+  protected retrieveBEMClasses(
+    className: string,
+    prefix: "b" | "e" | "mb" | "me"
+  ) {
     return className
       .split(" ")
-      .filter((cls) => cls[0] === prefix && cls.includes(":"));
+      .filter(
+        (cls) =>
+          (cls[0] === prefix || cls.slice(0, 2) === prefix) && cls.includes(":")
+      );
   }
 
   protected getClassId(className: string) {
@@ -19,6 +25,23 @@ abstract class BemEntity {
 
   protected formatClassName(className: string) {
     return className.split(":")[1];
+  }
+
+  protected replaceModifierClassName(bemClassName: string, bemName: string) {
+    const prefix = bemClassName[0] as "b" | "e";
+    const modifiers = this.retrieveBEMClasses(
+      this.node.attribs.class,
+      `m${prefix}`
+    );
+
+    modifiers.forEach((modifier) => {
+      const id = this.getClassId(modifier);
+
+      this.node.attribs.class = this.node.attribs.class.replace(
+        `${id}:`,
+        `${bemName}--`
+      );
+    });
   }
 
   abstract replaceClassNames(): void;
@@ -35,9 +58,11 @@ export class BlockEntity extends BemEntity {
     const blockClasses = this.retrieveBEMClasses(className, "b");
 
     blockClasses.forEach((blockClass) => {
+      const blockName = this.formatClassName(blockClass);
+      this.replaceModifierClassName(blockClass, blockName);
       this.node.attribs.class = this.node.attribs.class.replace(
         blockClass,
-        this.formatClassName(blockClass)
+        blockName
       );
     });
   }
@@ -82,12 +107,17 @@ export class ElementEntity extends BemEntity {
 
     const classesArr = blockNodeClasses.split(" ");
 
-    const blockName = classesArr.find((cls) => {
+    const blockClassName = classesArr.find((cls) => {
       return cls.includes(`${this.getClassId(className).replace("e", "b")}`);
     });
 
-    if (!blockName) return;
+    if (!blockClassName) return;
 
-    return this.formatClassName(blockName);
+    const blockName = this.formatClassName(blockClassName);
+    const elementName = this.formatClassName(className);
+
+    this.replaceModifierClassName(className, `${blockName}__${elementName}`);
+
+    return blockName;
   }
 }
