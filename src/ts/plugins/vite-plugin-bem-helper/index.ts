@@ -1,7 +1,7 @@
 import { Plugin } from "vite";
 import * as cheerio from "cheerio";
-import { BlockEntity, ElementEntity } from "./helpers/bem";
-import selectBEMElements from "./helpers/selectBEMElements";
+import { BlockEntity, ElementEntity } from "./bem";
+import selectBEMElements from "./selectBEMElements";
 
 const transformHtml = (html: string) => {
   const $ = cheerio.load(html);
