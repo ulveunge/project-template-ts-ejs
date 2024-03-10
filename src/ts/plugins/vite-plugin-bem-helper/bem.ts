@@ -27,7 +27,7 @@ abstract class BemEntity {
     return className.split(":")[1];
   }
 
-  protected replaceModifierClassName(bemClassName: string, bemName: string) {
+  protected replaceModifierClassNames(bemClassName: string, bemName: string) {
     const prefix = bemClassName[0] as "b" | "e";
     const modifiers = this.retrieveBEMClasses(
       this.node.attribs.class,
@@ -62,7 +62,7 @@ export class BlockEntity extends BemEntity {
 
     blockClasses.forEach((blockClass) => {
       const blockName = this.formatClassName(blockClass);
-      this.replaceModifierClassName(blockClass, blockName);
+      this.replaceModifierClassNames(blockClass, blockName);
       this.node.attribs.class = this.node.attribs.class.replace(
         blockClass,
         blockName
@@ -119,7 +119,7 @@ export class ElementEntity extends BemEntity {
     const blockName = this.formatClassName(blockClassName);
     const elementName = this.formatClassName(className);
 
-    this.replaceModifierClassName(className, `${blockName}__${elementName}`);
+    this.replaceModifierClassNames(className, `${blockName}__${elementName}`);
 
     return blockName;
   }
