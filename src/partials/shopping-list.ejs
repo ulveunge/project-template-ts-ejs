@@ -1,9 +1,10 @@
-<ul class="b_shopping-list m_red m_big <%= className ? className : '' %>">
+<ul class="b:shopping-list m:red m:big <%= className ? className : '' %>">
   <% shoppingList.forEach((item, index) => { %>
-  <li class="b_interactive-border e_list-item m_<%= index %>">
-    <span class="e_text">
+  <li class="b-2:interactive-border e:list-item m:<%= index %>">
+    <span class="e:text">
       <%= item.name %>, <%= item.price %>$
     </span>
+    <div class="e-2:content"></div>
   </li>
   <% }) %>
 </ul>
