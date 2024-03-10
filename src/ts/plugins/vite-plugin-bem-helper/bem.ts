@@ -36,6 +36,9 @@ abstract class BemEntity {
 
     modifiers.forEach((modifier) => {
       const id = this.getClassId(modifier);
+      const bemId = this.getClassId(bemClassName);
+
+      if (id.slice(2) !== bemId.slice(1)) return;
 
       this.node.attribs.class = this.node.attribs.class.replace(
         `${id}:`,
